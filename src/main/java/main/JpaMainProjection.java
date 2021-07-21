@@ -18,18 +18,23 @@ public class JpaMainProjection {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-//            Member member = new Member();
-//            member.setUsername("liam");
-//            member.setAge(10);
-//            em.persist(member);
 
+//            for(int i=0; i<100;i++){
+//                Member member = new Member();
+//                member.setUsername("member"+i);
+//                member.setAge(i);
+//                em.persist(member);
+//            }
 
-            List<MemberDTO> result = em.createQuery("select new jpql.MemberDTO(m.username, m.age) from Member m", MemberDTO.class)
+            List<Member> result = em.createQuery("select m from Member m order by m.age desc", Member.class)
+                    .setFirstResult(1)
+                    .setMaxResults(7)
                     .getResultList();
-            MemberDTO memberDTO = result.get(0);
-            System.out.println("usernmae = " + memberDTO.getUsername());
-            System.out.println("age = " + memberDTO.getAge());
-
+            System.out.println("result = " + result.size());
+            for (Member member : result) {
+                System.out.println("member = " + member);
+                System.out.println("====================");
+            }
 
             tx.commit();
         }catch(Exception e){
