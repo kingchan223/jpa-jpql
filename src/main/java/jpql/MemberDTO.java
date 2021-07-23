@@ -1,13 +1,17 @@
 package jpql;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class MemberDTO {
     private String username;
     private int age;
 
-    public MemberDTO(String username, int age) {
-        this.username = username;
-        this.age = age;
-    }
+
+    public MemberDTO() {}
+
 
     public String getUsername() {
         return username;
